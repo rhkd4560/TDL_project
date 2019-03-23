@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>ToDoList</title>
+    <!--<link rel="stylesheet" href="/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            font-size: 15px;
+            border: 2px solid #bce8f1;
+            text-align: center;
+            padding: 5px;
+        }
+        thead {
+            background-color: black;
+            color: whitesmoke;
+        }
+
+        tr:nth-child(even) {
+            background-color: #46b8da;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="center-block" style="text-align: center">
+        <h1 style="font-family: Verdana;"><strong>My To Do List</strong></h1>
+    </div>
+    <br/>
+    <div class="center-block" style="width:100px;margin:10px 0;">
+        <input id="description" type="text" value=""/>
+        <input id= "insert" type="submit" value="등록"/>
+    </div>
+
+
+
+    <div id="mainHide">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="col-md-1">완료</th>
+                <th class="col-md-1">#</th>
+                <th class="col-md-2">완료 여부</th>
+                <th class="col-md-2">내용</th>
+                <th class="col-md-2">생성 날짜</th>
+                <th class="col-md-2">완료 날짜</th>
+                <th class="col-md-2">EDIT</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="todoList : ${todoList}">
+                <td th:if="!${todoList.status}">
+                    <button data-th-value="${todoList.idx}" class="complete"><img src="/images/not_complete_box.png" style="width:20px;height:20px;" class= "img1"> </button>
+                </td>
+                <td th:if="${todoList.status}">
+                    <button data-th-value="${todoList.idx}" class="complete"><img src="/images/complete_check_box.png" style="width:20px;height:20px;" class= "img1"> </button>
+                </td>
+                <td th:text="${todoList.idx}"></td>
+                <td th:text="${todoList.status}"></td>
+                <td th:text="${todoList.description}"></td>
+                <td th:text="${todoList.createdDate} ? ${#temporals.format(todoList.createdDate,'yyyy-MM-dd HH:mm')} : ${todoList.createdDate}"></td>
+                <td th:text="${todoList.completedDate} ? ${#temporals.format(todoList.completedDate,'yyyy-MM-dd HH:mm')} : ${todoList.completedDate}"></td>
+                <td>
+                    <button type="button" data-th-value="${todoList.idx}" class="update"><img src="/images/edit.png"> </button>
+                    <button data-th-value="${todoList.idx}" class="delete"><img src="/images/trash_icon.png" style="width:20px;height:20px;"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script>
+    $('#insert').click(function () {
+        var jsonData = JSON.stringify({
+            description: $('#description').val()
+        });
+        $.ajax({ //ajax
+            url: "http://localhost:8080/tdl/",
+            type: "POST",
+            data: jsonData,
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                alert('저장 성공!');
+                location.href = '/tdl/list';
+            },
+            error: function () {
+                alert('저장 실패!');
+            }
+        });
+    });
+    $('.delete').click(function () {
+        var idx = $(this).val();
+        $.ajax({
+            url: "http://localhost:8080/tdl/delete/" + idx,
+            type: "DELETE",
+            success: function () {
+                alert('삭제 성공!');
+                location.href = '/tdl/list';
+            },
+            error: function () {
+                alert('삭제 실패!');
+            }
+        });
+    });
+    $('.update').click(function () {
+        var descriptiondata = prompt("수정할 내용 입력하세요");
+        var update_id = $(this).val();
+        $.ajax({
+            url: "http://localhost:8080/tdl/update/" + update_id,
+            type: "PUT",
+            data: descriptiondata,
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                alert('수정 성공!');
+                location.href = '/tdl/list';
+            },
+            error: function () {
+                alert('수정 실패!');
+            }
+        });
+    });
+    $('.complete').click(function () {
+        $.ajax({
+            url: "http://localhost:8080/tdl/complete/" + $(this).val(),
+            type: "PUT",
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                alert('완료 성공!');
+                location.href = '/tdl/list';
+            },
+            error: function () {
+                alert('완료 실패!');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
