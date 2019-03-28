@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <head>
+            <title>로그인</title>
+            <style>
+                div { text-align: center; }
+            </style>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="/css/style.css">
+            <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+        </head>
+<body>
+<div class="page-header">
+    <img src="/images/login_logo.jpg" style="width: 30%">
+</div>
+<div class="login-form">
+    <form>
+        <input type="text" name="name" id="email" class="text-field" placeholder="email" style="text-align: center"><br>
+        <input type="password" name="password" id="password" class="text-field" placeholder="password" style="text-align: center"><br>
+        <button class="submit-btn" type="button">회원가입</button>
+    </form>
+    <div class="links">
+        <a href="http://localhost:8080/login">뒤로가기</a>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $('.submit-btn').click(function () {
+        if($('#email').val().trim().length == 0){
+            alert("id를 입력하세요.");
+            $('#email').val().focus();
+            return false;
+        }
+        if($('#password').val().trim().length == 0){
+            alert("password를 입력하세요");
+            $('#password').val().focus();
+            return false;
+        }
+
+        var jsonData = JSON.stringify({
+            email: $('#email').val(),
+            password: $('#password').val()
+        });
+        $.ajax({
+            url: "http://localhost:8080/tdl/login/create",
+            type: "POST",
+            data: jsonData,
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                alert('유저 생성!');
+                location.href = '/login';
+            },
+            error: function () {
+                alert('생성 실패!');
+            }
+        });
+    });
+</script>
+</body>
+</html>
