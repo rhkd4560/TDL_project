@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인</title>
+    <style>
+        div { text-align: center; }
+    </style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+</head>
+<body>
+<div class="page-header">
+    <img src="/images/login_logo.jpg" style="width: 30%">
+</div>
+<div class="login-form">
+    <form th:action="@{/login}" method="post">
+<!--        <input type="text" id="email" class="text-field" placeholder="이메일 주소" style="text-align: center"><br>-->
+<!--        <input type="password"  id="password" class="text-field" placeholder="비밀번호" style="text-align: center"><br>-->
+<!--        <button class="submit-btn" type="button">로그인</button>-->
+
+        <div><label> User Name : <input type="text" name="username"/> </label></div>
+        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Sign In"/></div>
+<!--        <button class="submit-btn"><a href="/register">ID가 없나요?</a></button>-->
+    </form>
+    <div class="links">
+        <a href="http://localhost:8080/register">ID가 없나요?</a>
+    </div>
+</div>
+
+<!--<script th:src="@{/js/jquery.min.js}"></script>
+<script>
+    $('.submit-btn').click(function () {
+        var jsonData = JSON.stringify({
+            email: $('#email').val(),
+            password: $('#password').val()
+        });
+        $.ajax({
+            url: "http://localhost:8080/login/success",
+            type: "POST",
+            data: jsonData,
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                $.ajax({
+                    url: "/login/post",
+                    type: "POST",
+                    data: jsonData,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function () {
+                        alert("여기까지 오나여")
+                    }
+                })
+            },
+            error: function () {
+                alert('로그인 실패!');
+            }
+        });
+    });
+</script>-->
+</body>
+</html>
