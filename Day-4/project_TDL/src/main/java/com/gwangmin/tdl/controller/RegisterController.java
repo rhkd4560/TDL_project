@@ -25,12 +25,12 @@ public class RegisterController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String register(){
+    public String register() {
         return "/tdl/register";
     }
 
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody User user){
+    public ResponseEntity<?> register(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return new ResponseEntity<>("{}", HttpStatus.CREATED);

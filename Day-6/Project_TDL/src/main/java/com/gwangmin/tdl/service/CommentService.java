@@ -14,7 +14,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public List<Comment> findList(ToDoList toDoList){
+    public List<Comment> findList(ToDoList toDoList) {
         return commentRepository.findAllByToDoListOrderByIdxAsc(toDoList);
     }
 }

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService  implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
 
-    public User findUser(String email){
+    public User findUser(String email) {
         return userRepository.findByemail(email);
     }
 
@@ -27,7 +27,7 @@ public class UserService  implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByemail(email);
 
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("유저 없음" + user.getEmail());
         }
 

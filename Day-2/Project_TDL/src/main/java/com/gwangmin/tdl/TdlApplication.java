@@ -26,11 +26,12 @@ public class TdlApplication {
         return (args) -> {
 
             User user = userRepository.save(User.builder()
-                .password("test")
-                .email("havi@gmail.com")
-                .build());
+                    .password("test")
+                    .email("havi@gmail.com")
+                    .build());
         };
     }
+
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();

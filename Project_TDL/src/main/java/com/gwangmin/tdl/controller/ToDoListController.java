@@ -27,7 +27,7 @@ public class ToDoListController {
     private User useridx;
 
 
-    public ToDoListController(ToDoListRepository toDoListRepository, UserRepository userRepository){
+    public ToDoListController(ToDoListRepository toDoListRepository, UserRepository userRepository) {
         this.toDoListRepository = toDoListRepository;
         this.userRepository = userRepository;
     }
@@ -35,13 +35,13 @@ public class ToDoListController {
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("todoList", todoListService.findList());
-        if(useridx == null) useridx = todoListService.findUser();
+        if (useridx == null) useridx = todoListService.findUser();
         System.out.println(useridx);
         return "/tdl/list";
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getList(){
+    public ResponseEntity<?> getList() {
         List<ToDoList> toDoLists = toDoListRepository.findAll();
         return ResponseEntity.ok(toDoLists);
     }
@@ -54,7 +54,7 @@ public class ToDoListController {
 
 
     @PostMapping
-    public ResponseEntity<?> postList(@RequestBody ToDoList toDoList){
+    public ResponseEntity<?> postList(@RequestBody ToDoList toDoList) {
         toDoList.setUser(useridx);
         toDoList.setCreatedDateNow();
         toDoListRepository.save(toDoList);
@@ -62,7 +62,7 @@ public class ToDoListController {
     }
 
     @PutMapping("/update/{idx}")
-    public ResponseEntity<?> putList(@PathVariable("idx")Integer idx, @RequestBody String description) {
+    public ResponseEntity<?> putList(@PathVariable("idx") Integer idx, @RequestBody String description) {
         ToDoList persistList = toDoListRepository.getOne(idx);
         persistList.update(description);
         toDoListRepository.save(persistList);
@@ -70,7 +70,7 @@ public class ToDoListController {
     }
 
     @PutMapping("/complete/{idx}")
-    public ResponseEntity<?> completeList(@PathVariable("idx")Integer idx) {
+    public ResponseEntity<?> completeList(@PathVariable("idx") Integer idx) {
         ToDoList persistList = toDoListRepository.getOne(idx);
         persistList.complete();
         toDoListRepository.save(persistList);
@@ -78,7 +78,7 @@ public class ToDoListController {
     }
 
     @DeleteMapping("/delete/{idx}")
-    public ResponseEntity<?> deleteList(@PathVariable("idx")Integer idx) {
+    public ResponseEntity<?> deleteList(@PathVariable("idx") Integer idx) {
         toDoListRepository.deleteById(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

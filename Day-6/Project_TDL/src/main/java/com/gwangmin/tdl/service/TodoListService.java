@@ -11,7 +11,7 @@ import java.util.List;
 public class TodoListService {
     private final ToDoListRepository toDoListRepository;
 
-    public TodoListService(ToDoListRepository toDoListRepository){
+    public TodoListService(ToDoListRepository toDoListRepository) {
         this.toDoListRepository = toDoListRepository;
     }
 

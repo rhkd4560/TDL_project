@@ -3,7 +3,9 @@
 <head>
     <title>로그인</title>
     <style>
-        div { text-align: center; }
+        div {
+            text-align: center;
+        }
     </style>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/style.css">
@@ -15,8 +17,10 @@
 </div>
 <div class="login-form">
     <form th:action="@{/login}" method="post">
-        <div><label><input class="text-field" placeholder="이메일 주소" style="text-align: center" id="email" type="text" name="username"/> </label></div>
-        <div><label><input class="text-field" placeholder="비밀번호" style="text-align: center" id="password" type="password" name="password"/> </label></div>
+        <div><label><input class="text-field" placeholder="이메일 주소" style="text-align: center" id="email" type="text"
+                           name="username"/> </label></div>
+        <div><label><input class="text-field" placeholder="비밀번호" style="text-align: center" id="password"
+                           type="password" name="password"/> </label></div>
         <div th:if="${param.error}"><p style="color: red; font-size: 12px; margin-top: -10px">필수 정보를 확인해주세요.</p>
         </div>
         <div><input class="submit-btn" type="submit" value="Sign In"/></div>

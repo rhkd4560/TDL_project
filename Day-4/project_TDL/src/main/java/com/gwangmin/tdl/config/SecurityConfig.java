@@ -27,25 +27,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**", "/register/**").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/", "/login/**", "/css/**", "/images/**", "/js/**", "/console/**", "/register/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/loginSuccess")
-                    .permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/loginSuccess")
+                .permitAll()
                 .and()
-                    .logout()
-                    .logoutSuccessUrl("/login")
-                    .permitAll()
+                .logout()
+                .logoutSuccessUrl("/login")
+                .permitAll()
                 .and()
-                    .csrf().disable();
+                .csrf().disable();
 
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

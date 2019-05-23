@@ -18,6 +18,7 @@
             text-align: center;
             padding: 5px;
         }
+
         thead {
             background-color: black;
             color: whitesmoke;
@@ -37,42 +38,62 @@
     <br/>
     <div class="center-block" style="width:100px;margin:10px 0;">
         <input id="description" type="text" value=""/>
-        <input id= "insert" type="submit" value="등록"/>
+        <input id="insert" type="submit" value="등록"/>
         <a href="#" onclick="document.getElementById('logout-form').submit();">Sign out</a>
         <form id="logout-form" action="/logout" method="POST">
             <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         </form>
     </div>
 
-    <div id="main" th:each="todoList : ${todoList}" style="width:100%; height: auto; border: 3px solid black; border-radius: 10px; margin-top: 20px">
+    <div id="main" th:each="todoList : ${todoList}"
+         style="width:100%; height: auto; border: 3px solid black; border-radius: 10px; margin-top: 20px">
         <div th:if="!${todoList.status}">
-            <button data-th-value="${todoList.idx}" class="complete" style="float: left; background-color: white; border: white; outline: white;padding-left: 10px; padding-right: 30px"><img src="/images/not_complete_box.png" style="width:20px;height:20px; margin-top: 70px" class= "img1"> </button>
+            <button data-th-value="${todoList.idx}" class="complete"
+                    style="float: left; background-color: white; border: white; outline: white;padding-left: 10px; padding-right: 30px">
+                <img src="/images/not_complete_box.png" style="width:20px;height:20px; margin-top: 70px" class="img1">
+            </button>
         </div>
         <div th:if="${todoList.status}">
-            <button data-th-value="${todoList.idx}" class="complete" style="float: left; background-color: white; border: white; outline: white;padding-left: 10px; padding-right: 30px"><img src="/images/complete_check_box.png" style="width:20px;height:20px; margin-top: 70px" class= "img1"> </button>
+            <button data-th-value="${todoList.idx}" class="complete"
+                    style="float: left; background-color: white; border: white; outline: white;padding-left: 10px; padding-right: 30px">
+                <img src="/images/complete_check_box.png" style="width:20px;height:20px; margin-top: 70px" class="img1">
+            </button>
         </div>
         <div>
-            <h1 class="content" th:text="${todoList.description}" contenteditable="false" style="display: inline-block; margin-top: 60px; margin-bottom: 20px;"></h1>
-            <button type="button" class="reply" style="float: right; background-color: white; border: 0; outline: 0;"><img src="/images/reply.png" style="width:20px;height:20px; margin-top: 70px"></button>
-            <button data-th-value="${todoList.idx}" class="delete" style="float: right; background-color: white; border: 0; outline: 0; display: block;"><img src="/images/trash_icon.png" style="width:20px;height:20px; margin-top: 70px"></button>
-            <button type="button" data-th-value="${todoList.idx}" class="update" style="float: right; margin: auto; background-color: white; border: white; outline: white; display: block;"><img src="/images/edit.png" style="margin-top: 70px"> </button>
+            <h1 class="content" th:text="${todoList.description}" contenteditable="false"
+                style="display: inline-block; margin-top: 60px; margin-bottom: 20px;"></h1>
+            <button type="button" class="reply" style="float: right; background-color: white; border: 0; outline: 0;">
+                <img src="/images/reply.png" style="width:20px;height:20px; margin-top: 70px"></button>
+            <button data-th-value="${todoList.idx}" class="delete"
+                    style="float: right; background-color: white; border: 0; outline: 0; display: block;"><img
+                    src="/images/trash_icon.png" style="width:20px;height:20px; margin-top: 70px"></button>
+            <button type="button" data-th-value="${todoList.idx}" class="update"
+                    style="float: right; margin: auto; background-color: white; border: white; outline: white; display: block;">
+                <img src="/images/edit.png" style="margin-top: 70px"></button>
         </div>
         <div class="datetime">
-            <p th:text="${todoList.createdDate} ? ${#temporals.format(todoList.createdDate,'yyyy-MM-dd HH:mm')} : ${todoList.createdDate}" style="padding-left: 30px; margin-top: 30px"></p>
+            <p th:text="${todoList.createdDate} ? ${#temporals.format(todoList.createdDate,'yyyy-MM-dd HH:mm')} : ${todoList.createdDate}"
+               style="padding-left: 30px; margin-top: 30px"></p>
         </div>
         <ul class="list">
-            <li class="replylist" th:each=" comments : ${todoList.comments}" th:data-idx="${comments.idx}" style="display: none; list-style: none">
-                <h1 class="replycontent" th:text="${comments.content}" contenteditable="false" style="display: inline-block;"></h1>
+            <li class="replylist" th:each=" comments : ${todoList.comments}" th:data-idx="${comments.idx}"
+                style="display: none; list-style: none">
+                <h1 class="replycontent" th:text="${comments.content}" contenteditable="false"
+                    style="display: inline-block;"></h1>
                 <p th:text="${comments.createdDate} ? ${#temporals.format(comments.createdDate,'yyyy-MM-dd HH:mm')} : ${comments.createdDate}"></p>
-                <button data-th-value="${comments.idx}" class="replydelete" style="float: right; background-color: white; border: white; outline: white; display: block;"><img src="/images/trash_icon.png" style="width:20px;height:20px;"></button>
-                <button type="button" data-th-value="${comments.idx}" class="replyupdate" style="float: right; margin: auto; background-color: white; border: 0; outline: 0; display: block;"><img src="/images/edit.png"></button>
+                <button data-th-value="${comments.idx}" class="replydelete"
+                        style="float: right; background-color: white; border: white; outline: white; display: block;">
+                    <img src="/images/trash_icon.png" style="width:20px;height:20px;"></button>
+                <button type="button" data-th-value="${comments.idx}" class="replyupdate"
+                        style="float: right; margin: auto; background-color: white; border: 0; outline: 0; display: block;">
+                    <img src="/images/edit.png"></button>
             </li>
         </ul>
 
 
         <div class="replyclass" style="display: none">
-            <input class = "reply_text" type="text" value="">
-            <button th:value="${todoList.idx}" type="button" class="replysave" value="저장" >저장</button>
+            <input class="reply_text" type="text" value="">
+            <button th:value="${todoList.idx}" type="button" class="replysave" value="저장">저장</button>
         </div>
     </div>
 </div>
@@ -83,7 +104,7 @@
         $(this).parent().parent().find('.replylist').toggle(1000);
     });
     $('.replysave').click(function () {     //댓글 저장
-        var v = $(this).val() -1;
+        var v = $(this).val() - 1;
         var reply_text = $('.reply_text').eq(v).val();
         var ul_tag = $(this).parent().parent().find('ul');
         var jsonData = JSON.stringify({
@@ -131,7 +152,7 @@
         var idx = $(this).parent().data('idx');
         var contented = $(this).parent().find('.replycontent').attr('contenteditable');
         alert(typeof contented);
-        if(contented === "false"){
+        if (contented === "false") {
             $(this).parent().find('.replycontent').attr('contenteditable', true);
             alert(typeof contented);
             $(this).parent().find('.replycontent').trigger('focus');
@@ -216,7 +237,7 @@
         });
     });
     $('#insert').click(function () {
-        if($('#description').val().trim().length == 0){
+        if ($('#description').val().trim().length == 0) {
             alert("내용을 입력하세요. ");
             $('#description').val().focus();
             return false;
@@ -255,13 +276,13 @@
     });
     var a = 1;
     $('.update').click(function () {
-        if(a == 1) {
+        if (a == 1) {
             $(this).parent().find('.content').attr('contenteditable', true);
             $(this).parent().find('.content').trigger('focus');
             a = 2;
             $(this).find('.delete').attr(display = "none")
         }
-        if(a == 2){
+        if (a == 2) {
             $('.update').click(function () {
                 var descriptiondata = $(this).parent().parent().find('.content').text();
                 var update_id = $(this).val();

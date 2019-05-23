@@ -18,6 +18,7 @@
             text-align: center;
             padding: 5px;
         }
+
         thead {
             background-color: black;
             color: whitesmoke;
@@ -37,13 +38,12 @@
     <br/>
     <div class="center-block" style="width:100px;margin:10px 0;">
         <input id="description" type="text" value=""/>
-        <input id= "insert" type="submit" value="등록"/>
+        <input id="insert" type="submit" value="등록"/>
         <a href="#" onclick="document.getElementById('logout-form').submit();">Sign out</a>
         <form id="logout-form" action="/logout" method="POST">
             <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         </form>
     </div>
-
 
 
     <div id="mainHide">
@@ -62,10 +62,14 @@
             <tbody>
             <tr th:each="todoList : ${todoList}">
                 <td th:if="!${todoList.status}">
-                    <button data-th-value="${todoList.idx}" class="complete"><img src="/images/not_complete_box.png" style="width:20px;height:20px;" class= "img1"> </button>
+                    <button data-th-value="${todoList.idx}" class="complete"><img src="/images/not_complete_box.png"
+                                                                                  style="width:20px;height:20px;"
+                                                                                  class="img1"></button>
                 </td>
                 <td th:if="${todoList.status}">
-                    <button data-th-value="${todoList.idx}" class="complete"><img src="/images/complete_check_box.png" style="width:20px;height:20px;" class= "img1"> </button>
+                    <button data-th-value="${todoList.idx}" class="complete"><img src="/images/complete_check_box.png"
+                                                                                  style="width:20px;height:20px;"
+                                                                                  class="img1"></button>
                 </td>
                 <td th:text="${todoList.idx}"></td>
                 <td th:text="${todoList.status}"></td>
@@ -73,8 +77,11 @@
                 <td th:text="${todoList.createdDate} ? ${#temporals.format(todoList.createdDate,'yyyy-MM-dd HH:mm')} : ${todoList.createdDate}"></td>
                 <td th:text="${todoList.completedDate} ? ${#temporals.format(todoList.completedDate,'yyyy-MM-dd HH:mm')} : ${todoList.completedDate}"></td>
                 <td>
-                    <button type="button" data-th-value="${todoList.idx}" class="update"><img src="/images/edit.png"> </button>
-                    <button data-th-value="${todoList.idx}" class="delete"><img src="/images/trash_icon.png" style="width:20px;height:20px;"></button>
+                    <button type="button" data-th-value="${todoList.idx}" class="update"><img src="/images/edit.png">
+                    </button>
+                    <button data-th-value="${todoList.idx}" class="delete"><img src="/images/trash_icon.png"
+                                                                                style="width:20px;height:20px;">
+                    </button>
                 </td>
             </tr>
             </tbody>
@@ -100,7 +107,7 @@
         });
     });
     $('#insert').click(function () {
-        if($('#description').val().trim().length == 0){
+        if ($('#description').val().trim().length == 0) {
             alert("내용을 입력하세요. ");
             $('#description').val().focus();
             return false;
@@ -139,12 +146,12 @@
     });
     var a = 1;
     $('.update').click(function () {
-        if(a == 1) {
+        if (a == 1) {
             $(this).parent().parent().find('.content').attr('contenteditable', true);
             $(this).parent().parent().find('.content').trigger('focus');
             a = 2;
         }
-        if(a == 2){
+        if (a == 2) {
             $('.update').click(function () {
                 var descriptiondata = $(this).parent().parent().find('.content').text();
                 var update_id = $(this).val();

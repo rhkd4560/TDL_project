@@ -49,12 +49,14 @@ public class ToDoList implements Serializable {
     public void setCreatedDateNow() {
         this.createdDate = LocalDateTime.now();
     }
+
     public void update(String description) {
         this.createdDate = LocalDateTime.now();
         this.description = description;
     }
-    public void complete(){
-        if(status==null || status == false){
+
+    public void complete() {
+        if (status == null || status == false) {
             this.status = true;
             this.completedDate = LocalDateTime.now();
         } else {

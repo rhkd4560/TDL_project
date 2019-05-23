@@ -22,7 +22,7 @@ public class UserDTO implements Serializable {
     @Size(min = 4, max = 12)
     private String password;
 
-    public User user(){
+    public User user() {
         User user = new User();
         user.setEmail(this.email);
         user.setPassword(this.password);

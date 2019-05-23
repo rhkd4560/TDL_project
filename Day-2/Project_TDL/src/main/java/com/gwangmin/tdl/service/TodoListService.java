@@ -17,7 +17,7 @@ public class TodoListService {
     private final UserRepository userRepository;
 
 
-    public TodoListService(ToDoListRepository toDoListRepository, UserRepository userRepository){
+    public TodoListService(ToDoListRepository toDoListRepository, UserRepository userRepository) {
         this.toDoListRepository = toDoListRepository;
         this.userRepository = userRepository;
     }
@@ -26,7 +26,7 @@ public class TodoListService {
         return toDoListRepository.findAllByUserOrderByIdxAsc(user);
     }
 
-    public User findUser(String email){
+    public User findUser(String email) {
         return userRepository.findByemail(email);
     }
 

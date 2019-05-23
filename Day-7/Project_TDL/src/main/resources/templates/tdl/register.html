@@ -3,7 +3,9 @@
 <head>
     <title>회원가입</title>
     <style>
-        div { text-align: center; }
+        div {
+            text-align: center;
+        }
     </style>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/style.css">
@@ -17,7 +19,8 @@
     <form onsubmit="return false">
         <input type="text" name="name" id="email" class="text-field" placeholder="email" style="text-align: center">
         <p id="checkMsg"></p>
-        <input type="password" name="password" id="password" class="text-field" placeholder="password" style="text-align: center">
+        <input type="password" name="password" id="password" class="text-field" placeholder="password"
+               style="text-align: center">
         <p id="checkMsg1"></p>
         <button class="submit-btn" type="button">회원가입</button>
     </form>
@@ -28,14 +31,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
     var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-    var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+    var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
     $('#email').blur(function () {
-        if($('#email').val().trim().length == 0){
+        if ($('#email').val().trim().length == 0) {
             $('#checkMsg').html('<p style="color:red; font-size: 12px; margin-top: -20px">이메일을 입력해주세요.</p>');
-        } else if(!getMail.test($('#email').val())){
+        } else if (!getMail.test($('#email').val())) {
             $('#checkMsg').html('<p style="color:red; font-size: 12px; margin-top: -20px">이메일 형식을 맞춰주세요.</p>')
         }
-        else{
+        else {
             var jsonData = JSON.stringify({
                 email: $('#email').val()
             });
@@ -49,7 +52,7 @@
                     $('#checkMsg').html('<p style="color:blue; font-size: 12px; margin-top: -20px">사용가능한 이메일입니다.</p>');
                 },
                 error: function () {
-                    if($('#email').val().trim().length == 0){
+                    if ($('#email').val().trim().length == 0) {
                         $('#checkMsg').html('<p style="color:red; font-size: 12px; margin-top: -20px">이메일을 입력해주세요.</p>');
                     } else {
                         $('#checkMsg').html('<p style="color:red; font-size: 12px; margin-top: -20px">이미 있는 이메일입니다.</p>');
@@ -59,9 +62,9 @@
         }
     });
     $('#password').blur(function () {
-        if($('#password').val().trim().length == 0){
+        if ($('#password').val().trim().length == 0) {
             $('#checkMsg1').html('<p style="color:red; font-size: 12px; margin-top: -20px">4~12자의 영문 대소문자와 숫자로만 입력</p>')
-        } else if(!getCheck.test($('#password').val())){
+        } else if (!getCheck.test($('#password').val())) {
             $('#checkMsg1').html('<p style="color:red; font-size: 12px; margin-top: -20px">비밀번호를 형식에맞게 입력해주세요.</p>')
         } else {
             $('#checkMsg1').html('<p style="color:blue; font-size: 12px; margin-top: -20px">아주 좋은 비밀번호네요.</p>')
@@ -83,11 +86,11 @@
                 location.href = '/login';
             },
             error: function () {
-                if($('#email').val().trim().length === 0 && $('#password').val().trim().length !== 0){
+                if ($('#email').val().trim().length === 0 && $('#password').val().trim().length !== 0) {
                     $('#checkMsg').html('<p style="color:red; font-size: 12px; margin-top: -20px">필수정보 입력해주세요.</p>')
-                } else if($('#password').val().trim().length === 0 && $('#email').val().trim().length !== 0){
+                } else if ($('#password').val().trim().length === 0 && $('#email').val().trim().length !== 0) {
                     $('#checkMsg1').html('<p style="color:red; font-size: 12px; margin-top: -20px">필수정보 입력해주세요.</p>')
-                } else if($('#email').val().trim().length === 0 && $('#password').val().trim().length === 0){
+                } else if ($('#email').val().trim().length === 0 && $('#password').val().trim().length === 0) {
                     $('#checkMsg').html('<p style="color:red; font-size: 12px; margin-top: -20px">필수정보 입력해주세요.</p>')
                     $('#checkMsg1').html('<p style="color:red; font-size: 12px; margin-top: -20px">필수정보 입력해주세요.</p>')
                 }

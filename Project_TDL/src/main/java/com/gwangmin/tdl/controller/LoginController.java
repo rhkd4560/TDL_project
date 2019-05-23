@@ -19,12 +19,12 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "/tdl/login";
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "/tdl/register";
     }
 
@@ -35,7 +35,7 @@ public class LoginController {
         User loginUser = userRepository.findByemail(email);
         if (loginUser == null) {
             return null;
-        }  else if(!loginUser.getPassword().equals(password)) {
+        } else if (!loginUser.getPassword().equals(password)) {
             return null;
         }
         return new ResponseEntity<>("{}", HttpStatus.OK);

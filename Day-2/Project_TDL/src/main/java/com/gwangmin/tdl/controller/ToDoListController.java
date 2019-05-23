@@ -27,19 +27,20 @@ public class ToDoListController {
     private User useridx;
 
 
-    public ToDoListController(ToDoListRepository toDoListRepository, UserRepository userRepository){
+    public ToDoListController(ToDoListRepository toDoListRepository, UserRepository userRepository) {
         this.toDoListRepository = toDoListRepository;
         this.userRepository = userRepository;
     }
+
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         this.useridx = null;
         return "redirect:/login";
     }
 
     @GetMapping("/list")
     public String list(Model model) {
-        if(useridx == null) {
+        if (useridx == null) {
             return "redirect:/login";
         } else {
             model.addAttribute("todoList", todoListService.findList(this.useridx));
@@ -48,7 +49,7 @@ public class ToDoListController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getList(){
+    public ResponseEntity<?> getList() {
         List<ToDoList> toDoLists = toDoListRepository.findAll();
         return ResponseEntity.ok(toDoLists);
     }
@@ -60,7 +61,7 @@ public class ToDoListController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<?> findUser(@RequestBody Map<String, String> user){   //로그인한 유저값 받아오기
+    public ResponseEntity<?> findUser(@RequestBody Map<String, String> user) {   //로그인한 유저값 받아오기
         useridx = todoListService.findUser(user.get("email"));
         System.out.println(useridx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
@@ -68,7 +69,7 @@ public class ToDoListController {
 
 
     @PostMapping
-    public ResponseEntity<?> postList(@RequestBody ToDoList toDoList){      //생성
+    public ResponseEntity<?> postList(@RequestBody ToDoList toDoList) {      //생성
         toDoList.setUser(useridx);
         toDoList.setCreatedDateNow();
         toDoListRepository.save(toDoList);
@@ -76,9 +77,8 @@ public class ToDoListController {
     }
 
 
-
     @PutMapping("/update/{idx}")
-    public ResponseEntity<?> putList(@PathVariable("idx")Integer idx, @RequestBody String description) {    //수정
+    public ResponseEntity<?> putList(@PathVariable("idx") Integer idx, @RequestBody String description) {    //수정
         ToDoList persistList = toDoListRepository.getOne(idx);
         persistList.update(description);
         toDoListRepository.save(persistList);
@@ -86,7 +86,7 @@ public class ToDoListController {
     }
 
     @PutMapping("/complete/{idx}")
-    public ResponseEntity<?> completeList(@PathVariable("idx")Integer idx) {    //게시물 완료
+    public ResponseEntity<?> completeList(@PathVariable("idx") Integer idx) {    //게시물 완료
         ToDoList persistList = toDoListRepository.getOne(idx);
         persistList.complete();
         toDoListRepository.save(persistList);
@@ -94,7 +94,7 @@ public class ToDoListController {
     }
 
     @DeleteMapping("/delete/{idx}")
-    public ResponseEntity<?> deleteList(@PathVariable("idx")Integer idx) {  //삭제
+    public ResponseEntity<?> deleteList(@PathVariable("idx") Integer idx) {  //삭제
         toDoListRepository.deleteById(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

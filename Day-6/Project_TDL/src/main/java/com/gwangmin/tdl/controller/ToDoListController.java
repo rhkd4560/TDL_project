@@ -34,7 +34,7 @@ public class ToDoListController {
 
 
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         return "redirect:/login";
     }
 
@@ -48,13 +48,13 @@ public class ToDoListController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getList(){
+    public ResponseEntity<?> getList() {
         List<ToDoList> toDoLists = toDoListRepository.findAll();
         return ResponseEntity.ok(toDoLists);
     }
 
     @PostMapping
-    public ResponseEntity<?> postList(@RequestBody ToDoList toDoList){  //생성
+    public ResponseEntity<?> postList(@RequestBody ToDoList toDoList) {  //생성
         System.out.println(toDoList);
         toDoList.setCreatedDateNow();
         useridx.add(toDoList);
@@ -64,7 +64,7 @@ public class ToDoListController {
     }
 
     @PutMapping("/update/{idx}")
-    public ResponseEntity<?> putList(@PathVariable("idx")Integer idx, @RequestBody String description) {    //수정
+    public ResponseEntity<?> putList(@PathVariable("idx") Integer idx, @RequestBody String description) {    //수정
         ToDoList persistList = toDoListRepository.getOne(idx);
         persistList.update(description);
         toDoListRepository.save(persistList);
@@ -72,7 +72,7 @@ public class ToDoListController {
     }
 
     @PutMapping("/complete/{idx}")
-    public ResponseEntity<?> completeList(@PathVariable("idx")Integer idx) {    //게시물 완료
+    public ResponseEntity<?> completeList(@PathVariable("idx") Integer idx) {    //게시물 완료
         ToDoList persistList = toDoListRepository.getOne(idx);
         persistList.complete();
         toDoListRepository.save(persistList);
@@ -80,7 +80,7 @@ public class ToDoListController {
     }
 
     @DeleteMapping("/delete/{idx}")
-    public ResponseEntity<?> deleteList(@PathVariable("idx")Integer idx) {  //삭제
+    public ResponseEntity<?> deleteList(@PathVariable("idx") Integer idx) {  //삭제
         toDoListRepository.deleteById(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

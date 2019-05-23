@@ -7,6 +7,7 @@ body {
     margin: 0;
     background-color: white;
 }
+
 .login-form {
     position: absolute;
     padding: 20px;
@@ -19,32 +20,32 @@ body {
 }
 
 .text-field {
-    border:none;
-    border-radius:5px;
-    width:260px;
-    margin-bottom:10px;
-    padding:10px;
+    border: none;
+    border-radius: 5px;
+    width: 260px;
+    margin-bottom: 10px;
+    padding: 10px;
     font-size: 14px;
 }
 
 .submit-btn {
-    color:white;
-    width:260px;
-    border:none;
-    border-radius:5px;
+    color: white;
+    width: 260px;
+    border: none;
+    border-radius: 5px;
     background-color: #5bc0de;
     font-size: 14px;
-    margin-bottom:30px;
-    padding:10px;
+    margin-bottom: 30px;
+    padding: 10px;
 }
 
 .links {
-    text-decoration:None;
-    text-align:center;
+    text-decoration: None;
+    text-align: center;
 }
 
 .links a {
-    text-decoration:none;
-    color:#9B9B9B;
+    text-decoration: none;
+    color: #9B9B9B;
     font-size: 12px;
 }

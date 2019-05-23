@@ -27,24 +27,24 @@ public class RegisterController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String register(){
+    public String register() {
         return "/tdl/register";
     }
 
     @PostMapping
-    public ResponseEntity<?> register(@Valid @RequestBody UserDTO userDTO){
+    public ResponseEntity<?> register(@Valid @RequestBody UserDTO userDTO) {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userRepository.save(userDTO.user());
         return new ResponseEntity<>("{}", HttpStatus.CREATED);
     }
+
     @PostMapping("/confirm")
-    public ResponseEntity<?> confirm(@RequestBody Map<String, String> user){
+    public ResponseEntity<?> confirm(@RequestBody Map<String, String> user) {
         String email = user.get("email");
         User createdUser = userRepository.findByemail(email);
-        if(createdUser == null){
+        if (createdUser == null) {
             return new ResponseEntity<>("{}", HttpStatus.OK);
-        }
-        else {
+        } else {
             return null;
         }
     }

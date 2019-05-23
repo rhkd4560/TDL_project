@@ -19,7 +19,7 @@ public class CommentDTO implements Serializable {
 
     private LocalDateTime modifiedDate;
 
-    public CommentDTO (Comment comment){
+    public CommentDTO(Comment comment) {
         this.idx = comment.getIdx();
         this.content = comment.getContent();
         this.createdDate = comment.getCreatedDate();

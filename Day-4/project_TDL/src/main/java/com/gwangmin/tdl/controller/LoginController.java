@@ -23,13 +23,13 @@ public class LoginController {
 
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "/login";
     }
 
 
     @PostMapping("/login/post")
-    public ResponseEntity<?> findUser(@RequestBody Map<String, String> user){   //로그인한 유저값 받아오기
+    public ResponseEntity<?> findUser(@RequestBody Map<String, String> user) {   //로그인한 유저값 받아오기
         /*currentuser = userService.loadUserByUsername(user.get("email"));*/
         System.out.println(user);
         return new ResponseEntity<>("{}", HttpStatus.OK);

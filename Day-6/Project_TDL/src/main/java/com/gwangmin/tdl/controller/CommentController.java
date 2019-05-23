@@ -30,14 +30,14 @@ public class CommentController {
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getList(){
+    public ResponseEntity<?> getList() {
         List<Comment> comments = commentRepository.findAll();
         return ResponseEntity.ok(comments);
     }
 
 
     @PostMapping("/create/{idx}")
-    public ResponseEntity<?> postList(@PathVariable("idx")Integer idx, @RequestBody Comment comment){  //생성
+    public ResponseEntity<?> postList(@PathVariable("idx") Integer idx, @RequestBody Comment comment) {  //생성
         todo = toDoListRepository.getOne(idx);
         comment.setCreatedDateNow();
         comment.setToDoList(todo);
@@ -48,7 +48,7 @@ public class CommentController {
     }
 
     @PutMapping("/update/{idx}")
-    public ResponseEntity<?> putList(@PathVariable("idx")Integer idx, @RequestBody String content) {    //수정
+    public ResponseEntity<?> putList(@PathVariable("idx") Integer idx, @RequestBody String content) {    //수정
         Comment persistList = commentRepository.getOne(idx);
         persistList.update(content);
         commentRepository.save(persistList);
@@ -56,7 +56,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/delete/{idx}")
-    public ResponseEntity<?> deleteList(@PathVariable("idx")Integer idx) {  //삭제
+    public ResponseEntity<?> deleteList(@PathVariable("idx") Integer idx) {  //삭제
         commentRepository.deleteById(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

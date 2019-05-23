@@ -59,8 +59,9 @@ public class ToDoList implements Serializable {
         this.createdDate = LocalDateTime.now();
         this.description = description;
     }
-    public void complete(){
-        if(status==null || status == false){
+
+    public void complete() {
+        if (status == null || status == false) {
             this.status = true;
             this.completedDate = LocalDateTime.now();
         } else {
@@ -68,7 +69,8 @@ public class ToDoList implements Serializable {
             this.completedDate = null;
         }
     }
-    public void add(Comment comment){
+
+    public void add(Comment comment) {
         comment.setToDoList(this); //owner
         this.comments.add(comment);
     }

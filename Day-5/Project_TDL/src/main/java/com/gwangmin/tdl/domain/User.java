@@ -27,7 +27,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<ToDoList> toDoLists = new ArrayList<>();
 
-    public void add(ToDoList toDoList){
+    public void add(ToDoList toDoList) {
         toDoList.setUser(this); //owner
         this.toDoLists.add(toDoList);
     }

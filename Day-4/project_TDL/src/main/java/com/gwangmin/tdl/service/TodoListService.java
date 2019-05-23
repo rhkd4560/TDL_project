@@ -28,7 +28,7 @@ public class TodoListService implements UserDetailsService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public TodoListService(ToDoListRepository toDoListRepository, UserRepository userRepository){
+    public TodoListService(ToDoListRepository toDoListRepository, UserRepository userRepository) {
         this.toDoListRepository = toDoListRepository;
         this.userRepository = userRepository;
     }
@@ -37,7 +37,7 @@ public class TodoListService implements UserDetailsService {
         return toDoListRepository.findAllByUserOrderByIdxAsc(user);
     }
 
-    public User findUser(String email){
+    public User findUser(String email) {
         return userRepository.findByemail(email);
     }
 
